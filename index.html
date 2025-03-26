@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人网站</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <nav>
@@ -14,6 +15,53 @@
             <li><a href="#knowledge">知识区</a></li>
         </ul>
     </nav>
+
+    <div class="container">
+        <!-- 个人Profile区域 -->
+        <section id="profile">
+            <h2>个人Profile</h2>
+            <img src="https://avatars.githubusercontent.com/u/Han-Tao-scut" alt="个人头像" onerror="this.src='https://via.placeholder.com/150'">
+            <!-- GitHub信息将通过JavaScript动态加载 -->
+            <canvas id="commitChart"></canvas>
+        </section>
+
+        <!-- 个人随笔区域 -->
+        <section id="essays">
+            <h2>个人随笔</h2>
+            <form id="essayForm">
+                <textarea id="essayContent" placeholder="写下你的想法..."></textarea>
+                <button type="submit">保存随笔</button>
+            </form>
+            <div id="essayList">
+                <!-- 随笔列表将通过JavaScript动态加载 -->
+            </div>
+        </section>
+
+        <!-- 知识区域 -->
+        <section id="knowledge">
+            <h2>知识区</h2>
+            <div class="knowledge-card">
+                <h3>DNA存储</h3>
+                <p>DNA存储是一种利用DNA分子存储数字信息的技术，具有高密度、长期稳定等优势。</p>
+                <a href="/work/NGS Analysis Workflow For XIAOWA.md" target="_blank">查看NGS分析工作流</a>
+            </div>
+            <div class="knowledge-card">
+                <h3>生物信息学</h3>
+                <p>生物信息学是结合生物学、计算机科学和信息技术的交叉学科，用于分析和解释生物数据。</p>
+            </div>
+            <div class="knowledge-card">
+                <h3>编程技术</h3>
+                <p>掌握多种编程语言和工具，包括Python、JavaScript、R等，用于数据分析和网站开发。</p>
+                <a href="/work/R—VScode.md" target="_blank">R与VSCode集成指南</a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 个人网站 | 由 <a href="https://github.com/Han-Tao-scut" target="_blank">Han-Tao-scut</a> 创建</p>
+    </footer>
+
     <script src="script.js"></script>
+    <script src="essay.js"></script>
 </body>
 </html>
