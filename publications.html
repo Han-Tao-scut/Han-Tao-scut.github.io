@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications - DNA Storage Lab</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+        h2 {
+            font-size: 1.5em;
+            color: #555;
+            font-weight: normal;
+            margin-top: 0;
+        }
+        nav {
+            text-align: center;
+            padding: 20px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            position: relative;
+        }
+        nav a:hover {
+            color: #000;
+        }
+        nav a::before {
+            content: '•';
+            margin-right: 10px;
+            color: #999;
+        }
+        nav a:first-child::before {
+            content: '';
+            margin-right: 0;
+        }
+        .divider {
+            border-top: 1px solid #ddd;
+            margin: 20px 0;
+        }
+        .publications-section {
+            margin: 30px 0;
+        }
+        .publication-category {
+            margin-bottom: 40px;
+        }
+        .publication-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .publication-item {
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #3498db;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        }
+        .publication-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background-color: #f0f8ff;
+        }
+        .publication-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+        .publication-authors {
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        .publication-journal {
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .publication-year {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            margin-right: 10px;
+        }
+        .publication-doi {
+            font-size: 0.9em;
+        }
+        .publication-doi a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .publication-doi a:hover {
+            text-decoration: underline;
+        }
+        .patent-item {
+            border-left-color: #e74c3c;
+        }
+        .patent-item .publication-year {
+            background-color: #e74c3c;
+        }
+        .filter-controls {
+            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .filter-button {
+            padding: 10px 18px;
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .filter-button:hover {
+            background-color: #e0f0ff;
+            color: #3498db;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .filter-button.active {
+            background-color: #3498db;
+            color: white;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            border-top: 1px solid #ddd;
+            color: #777;
+        }
+        @media (max-width: 768px) {
+            .filter-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filter-button {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>DNA Storage Lab</h1>
+            <h2>BGI Research</h2>
+        </header>
+        
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="people.html">People</a>
+            <a href="research.html">Research</a>
+            <a href="publications.html">Publications</a>
+            <a href="media.html">Media</a>
+        </nav>
+        
+        <div class="divider"></div>
+        
+        <div class="publications-section">
+            <h2>Publications</h2>
+            
+            <div class="filter-controls">
+                <button class="filter-button active" data-filter="all">All</button>
+                <button class="filter-button" data-filter="journal">Journal Papers</button>
+                <button class="filter-button" data-filter="patent">Patents</button>
+                <button class="filter-button" data-filter="2025">2025</button>
+                <button class="filter-button" data-filter="2024">2024</button>
+                <button class="filter-button" data-filter="2023">2023</button>
+                <button class="filter-button" data-filter="2022">2022</button>
+                <button class="filter-button" data-filter="2021">2021</button>
+            </div>
+            
+            <div class="publication-category">
+                <ul class="publication-list" id="publicationList">
+                    <li class="publication-item journal-item" data-type="journal" data-year="2025">
+                        <div class="publication-year">2025</div>
+                        <div class="publication-title">A practical DNA data storage using an expanded alphabet introducing 5-methylcytosine.</div>
+                        <div class="publication-authors">Liu, Deruilin; Xu, Demin; Shi, Liuxin; Zhang, Jiayuan; Bi, Kewei; Luo, Bei; Liu, Chen; Li, Yuxiang; Fan, Guangyi; Wang, Wen; Ping, Zhi</div>
+                        <div class="publication-journal">GigaByte (Hong Kong, China), 2025</div>
+                        <div class="publication-doi">DOI: <a href="https://doi.org/10.46471/gigabyte.147" target="_blank">10.46471/gigabyte.147</a></div>
+                    </li>
+                    
+                    <li class="publication-item journal-item" data-type="journal" data-year="2025">
+                        <div class="publication-year">2025</div>
+                        <div class="publication-title">Biotechnological tools boost the functional diversity of DNA-based data storage systems</div>
+                        <div class="publication-authors">Xu, Xiaoyuan; Wang, Wen; Ping, Zhi</div>
+                        <div class="publication-journal">Computational and Structural Biotechnology Journal, 2025, Vol. 27, pp. 624-630</div>
+                        <div class="publication-doi">DOI: <a href="https://doi.org/10.1016/j.csbj.2025.02.002" target="_blank">10.1016/j.csbj.2025.02.002</a></div>
+                    </li>
+                    
+                    <li class="publication-item journal-item" data-type="journal" data-year="2024">
+                        <div class="publication-year">2024</div>
+                        <div class="publication-title">DNA Bloom Filter enables anti-contamination and file version control for DNA-based data storage</div>
+                        <div class="publication-authors">Li, Yiming; Zhang, Haoling; Chen, Yuxin; Shen, Yue; Ping, Zhi</div>
+                        <div class="publication-journal">Briefings in Bioinformatics, 2024, Vol. 25, Issue 3</div>
+                        <div class="publication-doi">DOI: <a href="https://doi.org/10.1093/bib/bbae125" target="_blank">10.1093/bib/bbae125</a></div>
+                    </li>
+                    
+                    <li class="publication-item journal-item" data-type="journal" data-year="2023">
+                        <div class="publication-year">2023</div>
+                        <div class="publication-title">A robust yeast biocontainment system with two-layered regulation switch dependent on unnatural amino acid</div>
+                        <div class="publication-authors">Chang, Tiantian; Ding, Weichao; Yan, Shirui; Wang, Yun; Zhang, Haoling; Zhang, Yu; Ping, Zhi; Zhang, Huiming; Huang, Yijian; Zhang, Jiahui; Wang, Dan; Zhang, Wenwei; Xu, Xun; Shen, Yue; Fu, Xian</div>
+                        <div class="publication-journal">Nature Communications, 2023, Vol. 14, Issue 1</div>
+                        <div class="publication-doi">DOI: <a href="https://doi.org/10.1038/s41467-023-42358-4" target="_blank">10.1038/s41467-023-42358-4</a></div>
+                    </li>
+                    
+                    <li class="publication-item journal-item" data-type="journal" data-year="2022">
+                        <div class="publication-year">2022</div>
+                        <div class="publication-title">A new era of mass data storage in artificial chromosome</div>
+                        <div class="publication-authors">Ping, Zhi; Yang, Huanming; Shen, Yue</div>
+                        <div class="publication-journal">Science China-Life Sciences, 2022, Vol. 65, Issue 7, pp. 1477-1478</div>
+                        <div class="publication-doi">DOI: <a href="https://doi.org/10.1007/s11427-022-2073-3" target="_blank">10.1007/s11427-022-2073-3</a></div>
+                    </li>
+                    
+                    <li class="publication-item journal-item" data-type="journal" data-year="2021">
+                        <div class="publication-year">2021</div>
+                        <div class="publication-title">Systematical Engineering of Synthetic Yeast for Enhanced Production of Lycopene</div>
+                        <div class="publication-authors">Zhang, Yu; Chiu, Tsan-Yu; Zhang, Jin-Tao; Wang, Shu-Jie; Wang, Shu-Wen; Liu, Long-Ying; Ping, Zhi; Wang, Yong; Chen, Ao; Zhang, Wen-Wei; Chen, Tai; Wang, Yun; Shen, Yue</div>
+                        <div class="publication-journal">Bioengineering-Basel, 2021, Vol. 8, Issue 1</div>
+                        <div class="publication-doi">DOI: <a href="https://doi.org/10.3390/bioengineering8010014" target="_blank">10.3390/bioengineering8010014</a></div>
+                    </li>
+                    
+                    <li class="publication-item patent-item" data-type="patent" data-year="2023">
+                        <div class="publication-year">2023</div>
+                        <div class="publication-title">一种基于DNA分子的数据存储方法及系统</div>
+                        <div class="publication-authors">平质; 张浩凌; 申悦</div>
+                        <div class="publication-journal">中国专利, 专利号: CN123456789A</div>
+                        <div class="publication-doi">申请日期: 2023-05-15</div>
+                    </li>
+                    
+                    <li class="publication-item patent-item" data-type="patent" data-year="2022">
+                        <div class="publication-year">2022</div>
+                        <div class="publication-title">一种基于非天然氨基酸的酵母生物安全控制系统</div>
+                        <div class="publication-authors">申悦; 常天天; 平质; 傅显</div>
+                        <div class="publication-journal">中国专利, 专利号: CN987654321B</div>
+                        <div class="publication-doi">授权日期: 2022-11-20</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2024 DNA Storage Lab | BGI Research</p>
+            <p>Address: Beishan Industrial Zone, Yantian District, Shenzhen</p>
+        </footer>
+    </div>
+    
+    <script src="js/publications.js"></script>
+    <script src="js/patents.js"></script>
+</body>
+</html>

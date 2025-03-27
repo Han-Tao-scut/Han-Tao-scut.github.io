@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People - DNA Storage Lab</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+        h2 {
+            font-size: 1.5em;
+            color: #555;
+            font-weight: normal;
+            margin-top: 0;
+        }
+        nav {
+            text-align: center;
+            padding: 20px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            position: relative;
+        }
+        nav a:hover {
+            color: #000;
+        }
+        nav a::before {
+            content: '•';
+            margin-right: 10px;
+            color: #999;
+        }
+        nav a:first-child::before {
+            content: '';
+            margin-right: 0;
+        }
+        .divider {
+            border-top: 1px solid #ddd;
+            margin: 20px 0;
+        }
+        .people-section {
+            margin: 30px 0;
+        }
+        .people-category {
+            margin-bottom: 40px;
+        }
+        .people-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+            min-height: 50px;
+        }
+        .person-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+            display: flex;
+            flex-direction: column;
+        }
+        .person-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            border-color: #3498db;
+        }
+        .person-photo {
+            width: 100%;
+            height: 250px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .person-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%; /* Adjust vertical position */
+        }
+        .person-photo svg {
+            width: 50%;
+            height: 50%;
+            opacity: 0.5;
+        }
+        .person-info {
+            padding: 20px;
+            position: relative;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .person-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        .person-title {
+            color: #3498db;
+            font-style: italic;
+            margin-bottom: 12px;
+            font-weight: 500;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 8px;
+        }
+        .person-bio {
+            font-size: 0.95em;
+            margin-bottom: 12px;
+            line-height: 1.5;
+            color: #555;
+            /* Removed flex-grow from bio to allow space for education */
+        }
+        /* Style for the Education section */
+        .person-education {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 12px;
+            padding-top: 10px;
+            border-top: 1px solid #eee; /* Separator */
+        }
+        .person-education strong {
+             display: block; /* Make "Education" label stand alone */
+             margin-bottom: 5px;
+             color: #444;
+        }
+        /* End Style for Education section */
+
+        .person-contact {
+            font-size: 0.9em;
+            color: #777;
+            display: block;
+            margin-top: auto; /* Push contact info to the bottom */
+            padding-top: 10px;
+            border-top: 1px solid #eee; /* Separator */
+            word-break: break-all;
+        }
+        .person-contact strong {
+            color: #555;
+            margin-right: 5px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            border-top: 1px solid #ddd;
+            color: #777;
+        }
+        @media (max-width: 768px) {
+            .people-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+             .person-photo {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>DNA Storage Lab</h1>
+            <h2>BGI Research</h2>
+        </header>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="people.html">People</a>
+            <a href="research.html">Research</a>
+            <a href="publications.html">Publications</a>
+            <a href="media.html">Media</a>
+        </nav>
+
+        <div class="divider"></div>
+
+        <div class="people-section">
+            <h2>Lab Members</h2>
+
+            <!-- Staff -->
+            <div class="people-category">
+                <h3>Staff</h3>
+                <div class="people-grid" id="grid-staff"></div>
+            </div>
+
+            <!-- PhD Students -->
+            <div class="people-category">
+                <h3>PhD Students</h3>
+                <div class="people-grid" id="grid-phd"></div>
+            </div>
+
+            <!-- Master Students -->
+            <div class="people-category">
+                <h3>Master Students</h3>
+                <div class="people-grid" id="grid-master"></div>
+            </div>
+
+            <!-- Undergraduate Students -->
+            <div class="people-category">
+                <h3>Undergraduate Students</h3>
+                <div class="people-grid" id="grid-undergrad"></div>
+            </div>
+
+            <!-- Visiting Students -->
+            <div class="people-category">
+                <h3>Visiting Students</h3>
+                <div class="people-grid" id="grid-visiting"></div>
+            </div>
+
+            <!-- Alumni -->
+            <div class="people-category">
+                <h3>Alumni</h3>
+                <div class="people-grid" id="grid-alumni"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 DNA Storage Lab | BGI Research</p>
+            <p>Address: BGI Building, Beishan Industrial Zone, Yantian District, Shenzhen</p>
+        </footer>
+    </div>
+
+    <script>
+        const jsonData = `[
+            {
+              "姓名": "平质",
+              "最高学位": "博士",
+              "职务": "副研究员",
+              "email": "pingzhi@cuhk.edu.cn",
+              "工作地址": "香港中文大学（深圳）",
+              "照片地址": "D:/DESTOP/DNA存储/镜像/web_lab/images/平质.png",
+              "教育经历": [
+                {"学位": "博士", "学校": "新加坡南洋理工大学"},
+                {"学位": "学士", "学校": "新加坡南洋理工大学"}
+              ],
+              "工作经历": [
+                {"机构": "深圳华大生命科学研究院", "职务": "主任科学家、副研究员", "时间": "2017年至2024年"}
+              ],
+              "研究兴趣": [
+                "DNA数据存储 (编码算法, 集成系统与流程开发)",
+                "生物信息学 (合成生物学中的应用)",
+                "DNA合成技术",
+                "合成生物学",
+                "BT-IT融合领域课题"
+              ],
+              "身份标签": "职工"
+            },
+            {
+              "姓名": "王雯",
+              "最高学位": "博士",
+              "职务": "副研究员",
+              "email": "wangwen4@genomics.cn",
+              "工作地址": "深圳华大生命科学研究院",
+              "照片地址": "D:/DESTOP/DNA存储/镜像/web_lab/images/王雯.jpg",
+              "教育经历": [
+                {"学位": "博士", "学校": "香港科技大学"},
+                {"学位": "学士", "学校": "浙江大学"}
+              ],
+              "工作经历": [
+                {"机构": "深圳华大生命科学研究院", "部门": "生物化学技术研究所 / 合成生物学平台", "职务": "副研究员", "时间": "2022-01至今"},
+                {"机构": "清华大学", "部门": "生命科学学院", "职务": "博士后", "时间": "2016-12至2021-12"}
+              ],
+              "研究兴趣": [
+                "新型DNA自组装方式的拓展与功能化开发",
+                "DNA纳米技术在生物领域的应用 (多组学成像技术, 蛋白超灵敏检测)",
+                "核酸纳米技术在DNA数字存储领域的应用",
+                "DNA纳米技术在功能材料的自组装方面的应用"
+              ],
+              "身份标签": "职工"
+            },
+            {
+              "姓名": "韩涛",
+              "最高学位": "学士",
+              "职务": "客座学生",
+              "email": "202166280375@mail.scut.edu.cn",
+              "工作地址": "深圳华大生命科学研究院",
+              "照片地址": "D:/DESTOP/DNA存储/镜像/web_lab/images/韩涛.jpg",
+              "教育经历": [
+                {"学位": "学士", "学校": "华南理工大学"}
+              ],
+              "工作经历": [
+                {"机构": null, "职务": "客座学生", "时间": "2025-01加入"}
+              ],
+              "研究兴趣": [],
+              "身份标签": "客座学生"
+            }
+          ]`; // Your JSON data here
+
+        const members = JSON.parse(jsonData);
+
+        function createPlaceholderSvg(color = '#bdc3c7') {
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="${color}"><circle cx="50" cy="35" r="20"/><path d="M50,60 C30,60 15,75 15,95 L85,95 C85,75 70,60 50,60"/></svg>`;
+        }
+
+        function getRelativeImagePath(fullPath) {
+            if (!fullPath || typeof fullPath !== 'string') return null;
+            const parts = fullPath.replace(/\\/g, '/').split('/');
+            const filename = parts.pop();
+            if (!filename) return null;
+            return `images/${filename}`;
+        }
+
+        const groupedMembers = {'职工': [],'博士': [],'硕士': [],'本科生': [],'客座学生': [],'已毕业人员': []};
+        members.forEach(member => {
+            const category = member['身份标签'];
+            if (groupedMembers.hasOwnProperty(category)) {
+                groupedMembers[category].push(member);
+            } else {
+                console.warn(`Unknown category tag: ${category} for member ${member['姓名']}`);
+            }
+        });
+
+        const gridMapping = {'职工': 'grid-staff','博士': 'grid-phd','硕士': 'grid-master','本科生': 'grid-undergrad','客座学生': 'grid-visiting','已毕业人员': 'grid-alumni'};
+
+        const placeholderCards = {
+            '博士': `<div class="person-card"><div class="person-photo">${createPlaceholderSvg('#3498db')}</div><div class="person-info"><div class="person-name">Position Available</div><div class="person-title">PhD Student</div><div class="person-bio">We are looking for motivated PhD students interested in DNA storage and DNA nanotechnology.</div></div></div>`,
+            '硕士': `<div class="person-card"><div class="person-photo">${createPlaceholderSvg('#e74c3c')}</div><div class="person-info"><div class="person-name">Position Available</div><div class="person-title">Master Student</div><div class="person-bio">We are looking for motivated Master students interested in DNA storage and DNA nanotechnology.</div></div></div>`,
+            '本科生': `<div class="person-card"><div class="person-photo">${createPlaceholderSvg('#9b59b6')}</div><div class="person-info"><div class="person-name">Position Available</div><div class="person-title">Undergraduate Student</div><div class="person-bio">We welcome undergraduate students to join our lab for research projects and internships.</div></div></div>`,
+             '已毕业人员': `<div class="person-card"><div class="person-photo">${createPlaceholderSvg('#95a5a6')}</div><div class="person-info"><div class="person-name">Alumni</div><div class="person-title">Former Lab Members</div><div class="person-bio">Information about our alumni will be updated here.</div></div></div>`,
+             '职工': null,
+             '客座学生': null
+         };
+
+        // Populate grids
+        for (const category in gridMapping) {
+            const gridId = gridMapping[category];
+            const gridElement = document.getElementById(gridId);
+            if (gridElement) {
+                gridElement.innerHTML = ''; // Clear grid
+                const categoryMembers = groupedMembers[category];
+
+                if (categoryMembers && categoryMembers.length > 0) {
+                    categoryMembers.forEach(member => {
+                        const imagePath = getRelativeImagePath(member['照片地址']);
+                        const researchInterests = member['研究兴趣'] && member['研究兴趣'].length > 0
+                            ? `Research Areas: ${member['研究兴趣'].join(', ')}`
+                            : 'Research interests not specified.';
+
+                        let photoHtml = imagePath
+                            ? `<img src="${imagePath}" alt="${member['姓名']}">`
+                            : createPlaceholderSvg();
+
+                        // --- Generate Education History HTML ---
+                        let educationHtml = '';
+                        if (member['教育经历'] && Array.isArray(member['教育经历']) && member['教育经历'].length > 0) {
+                            const educationItems = member['教育经历'].map(edu => {
+                                return `${edu['学位'] || ''}${edu['学位'] && edu['学校'] ? ', ' : ''}${edu['学校'] || ''}`; // Format as "Degree, School"
+                            }).join('<br>'); // Separate entries with line breaks
+                            educationHtml = `<div class="person-education"><strong>Education:</strong>${educationItems}</div>`;
+                        }
+                        // --- End Education History HTML ---
+
+                        // --- Contact Info HTML Generation ---
+                        let contactHtml = '';
+                        if (member['email']) {
+                             contactHtml += `<div class="person-contact"><strong>Email:</strong> ${member['email']}</div>`;
+                        }
+                        if (member['工作地址']) {
+                             contactHtml += `<div class="person-contact"><strong>Location:</strong> ${member['工作地址']}</div>`;
+                        }
+                        const joinedEntry = member['工作经历']?.find(exp => exp.时间 && exp.时间.includes('加入'));
+                        if (joinedEntry) {
+                             contactHtml += `<div class="person-contact"><strong>Joined:</strong> ${joinedEntry.时间.replace('加入','')}</div>`;
+                        }
+                         // Wrap all contact info in a container if needed, or keep separate divs
+                        // --- End Contact Info HTML ---
+
+
+                        const cardHtml = `
+                            <div class="person-card">
+                                <div class="person-photo">
+                                    ${photoHtml}
+                                </div>
+                                <div class="person-info">
+                                    <div class="person-name">${member['姓名'] || 'N/A'}</div>
+                                    <div class="person-title">${member['职务'] || 'N/A'}</div>
+                                    <div class="person-bio">${researchInterests}</div>
+                                    ${educationHtml} 
+                                    ${contactHtml} 
+                                </div>
+                            </div>
+                        `;
+                        gridElement.innerHTML += cardHtml;
+                    });
+                } else {
+                    const placeholderHtml = placeholderCards[category];
+                    if (placeholderHtml) {
+                        gridElement.innerHTML = placeholderHtml;
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
